@@ -1,44 +1,29 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> manuel
+// ****** Definición de Funciones del Reproductor de Música ******
+// Propósito: Notifica al usuario que el comando ingresado no es válido y limpia la pantalla.
 Funcion valorReproductor <- comandoNoEncontrado()
-	Escribir "Comando no encontrado, favor de colocar uno correcto"
-	Esperar 3 Segundos
-	Limpiar Pantalla
+	Escribir "Comando no encontrado, favor de colocar uno correcto" // Mensaje de error al usuario
+	Esperar 3 Segundos // Pausa para que el usuario lea el mensaje
 	valorReproductor <- Verdadero
 Fin Funcion
-
+// Propósito: Simula el apagado del reproductor y muestra un mensaje de despedida.
 Funcion valorReproductor <- apagarReproductor ( )
-	Escribir "Reproductor apagandose ..."
-<<<<<<< HEAD
-	Esperar 5 Segundos
-	Escribir "Hasta luego."
-	Esperar 2 Segundos
-	valorReproductor <- Falso
-Fin Funcion
-
-Funcion valorMusica <- busquedaMusica ()
-	
-	valorMusica <- "sin nombre"
-Fin Funcion
-=======
+	Escribir "Reproductor apagandose ..."  // Mensaje de apagado
 	Esperar 2 Segundos
 	Escribir "Hasta luego."
 	Esperar 1 Segundos
-	valorReproductor <- Falso
+	valorReproductor <- Falso// Establece el valor de retorno para salir del bucle principal
 Fin Funcion
-
+// Propósito: Cambia el estado de reproducción de la canción entre "Reproduciendo" y "Pausado".
 Funcion estadoReproduccion <- pausarMusica(estadoReproduccion)
-	Si estadoReproduccion = "Reproduciendo" Entonces
+	Si estadoReproduccion = "Reproduciendo" Entonces // Si la canción está reproduciéndose...
 		estadoReproduccion <- "Pausado"
 		Escribir "Canción pausada."
 		Esperar 2 Segundos
-	Sino 
-		Si estadoReproduccion = "Pausado" Entonces
+	Sino // Si no está reproduciendo (es decir, está "Pausado" o "Espera...")
+		Si estadoReproduccion = "Pausado" Entonces// Si estaba pausada...
 			estadoReproduccion <- "Reproduciendo"
 			Escribir "Reanudando reproducción."
-		Sino
+		Sino// Si está en cualquier otro estado (ej. "Espera...")
 			estadoReproduccion <- "Espera..."
 			
 		Fin Si
@@ -46,23 +31,16 @@ Funcion estadoReproduccion <- pausarMusica(estadoReproduccion)
 	Esperar 2 Segundos
 Fin Funcion
 
->>>>>>> manuel
 // Función para verificar si una cadena de texto representa un número válido.
 Funcion esNumero <- revisarNumero ( valorEscrito )
 	Definir valorE Como Entero // Variable para almacenar la longitud del valor escrito
 	valorE <- Longitud(valorEscrito)
 	
-<<<<<<< HEAD
-	esNumero <- Verdadero // Asume que la cadena es un número hasta que se demuestre lo contrario.
-	contador <- 0// Contador para llevar el control de los puntos decimales.
-	
-=======
 	
 	esNumero <- Verdadero // Asume que la cadena es un número hasta que se demuestre lo contrario.
 	contador <- 0// Contador para llevar el control de los puntos decimales.
 	
 	
->>>>>>> manuel
 	// Itera sobre cada carácter de la cadena de texto.
 	Para i <- 1 Hasta valorE Hacer // El ciclo recorre cada carácter de la cadena.
 		valorRevisar <- Subcadena(valorEscrito, i, i) // Extrae un solo carácter en la posición actual 'i'.
@@ -75,77 +53,52 @@ Funcion esNumero <- revisarNumero ( valorEscrito )
 		Fin Segun
 	FinPara
 Fin Funcion
-
+// Propósito: Permite al usuario ajustar el volumen del reproductor, validando la entrada.
 Funcion valorVolumen <- volumenMusica()
-	Definir esVolumenCorrecto Como Logico
+	Definir esVolumenCorrecto Como Logico // Variable para controlar la validez de la entrada
 	esVolumenCorrecto <- Falso
-	Repetir
-		Limpiar Pantalla
+	Repetir  // Bucle para pedir el volumen hasta que sea válido
+		
 		Escribir "Volumen:"
 		Escribir "Puede ser de 1 al 30"
-		Leer ingresaValor
+		Leer ingresaValor // Lee la entrada del usuario para el volumen
 		esNumero <- revisarNumero ( ingresaValor)
 		
-		Si esNumero = Verdadero Entonces
+		Si esNumero = Verdadero Entonces // Si la entrada es un número...
 			Si ConvertirANumero(ingresaValor) > 0 Y ConvertirANumero(ingresaValor) < 30 Entonces
 				Escribir "Valor correcto, se cambia el volumen."
-<<<<<<< HEAD
-				Esperar 3 Segundos
-				esVolumenCorrecto <- Verdadero
-			SiNo
-				Escribir "Ingrese un valor correcto"
-				Esperar 3 Segundos
-=======
 				Esperar 2 Segundos
-				esVolumenCorrecto <- Verdadero
+				esVolumenCorrecto <- Verdadero // La entrada es correcta, sale del bucle
 			SiNo
 				Escribir "Ingrese un valor correcto"
 				Esperar 2 Segundos
->>>>>>> manuel
-				esVolumenCorrecto <- Falso
+				esVolumenCorrecto <- Falso // La entrada es incorrecta, continúa en el bucle
 				
 			Fin Si
 		SiNo
 			Escribir "Ingrese un valor correcto"
-<<<<<<< HEAD
-			Esperar 3 Segundos
-			esVolumenCorrecto <- Falso
-			
-		Fin Si
-				
-=======
 			Esperar 2 Segundos
-			esVolumenCorrecto <- Falso
+			esVolumenCorrecto <- Falso // La entrada es incorrecta, continúa en el bucle
 			
 		Fin Si
 		
->>>>>>> manuel
-	Hasta Que esVolumenCorrecto = Verdadero
-	valorVolumen <- ConvertirANumero(ingresaValor)
+	Hasta Que esVolumenCorrecto = Verdadero // Repetir hasta que el volumen sea correcto
+	valorVolumen <- ConvertirANumero(ingresaValor) // Retorna el valor numérico del volumen validado
 Fin Funcion
 
-<<<<<<< HEAD
-Funcion Inicio(cancion, artista, genero, volumen )
-=======
+// Propósito: Muestra la interfaz principal del reproductor con la información actual de la canción y los comandos disponibles.
 Funcion Inicio(cancion, artista, genero, volumen, estadoReproduccion )
 	Limpiar Pantalla
->>>>>>> manuel
 	Escribir "*********************************"
 	Escribir "     Reproductor De Musica"
 	Escribir "*********************************"
-	
+	// Muestra la información de la canción actual
 	Escribir "     Cancion: ",cancion
 	Escribir "     Artista: ",artista
 	Escribir "     Genero: ",genero
-<<<<<<< HEAD
-	Escribir  ""
-	Escribir "     Volumen:", volumen
-	Escribir "      "Sin Saltar
-=======
 	Escribir "     Estado: ",estadoReproduccion
 	Escribir  ""
 	Escribir "     Volumen:", volumen
->>>>>>> manuel
 	Si volumen = 0 Entonces
 		Escribir  " "
 	SiNo
@@ -153,19 +106,8 @@ Funcion Inicio(cancion, artista, genero, volumen, estadoReproduccion )
 			Escribir "=" Sin Saltar
 		Fin Para
 	Fin Si
-	
+	// Lista de comandos disponibles
 	Escribir  ""
-<<<<<<< HEAD
-	Escribir "Comandos:"
-	Escribir "  BUSCAR: Busqueda de canciones"
-	Escribir "  VOLUMEN: Subir el volumen del reproductor"
-	Escribir " 	 APAGAR: Salir del reproductor"
-Fin Funcion
-
-
-Funcion valorSeleccionado <- ingresoValor( )
-	Leer valorSeleccionado
-=======
 	Escribir "---------------------------------" // Separador
 	Escribir "Comandos:"
 	Escribir "  BUSCAR: Busqueda de canciones"
@@ -174,36 +116,25 @@ Funcion valorSeleccionado <- ingresoValor( )
 	Escribir "  VOLUMEN: Subir el volumen del reproductor"
 	Escribir " 	 APAGAR: Salir del reproductor"
 	Escribir "---------------------------------" // Separador
-	Escribir "Ingresa un comando:"
+	Escribir "Ingresa un comando:"  // Petición de entrada al usuario
 	
->>>>>>> manuel
 Fin Funcion
 
+// ****** Proceso Principal del Reproductor de Música ******
 Proceso ReproductorMusica
-	
+	// Definición de variables globales para el estado del reproductor
 	Definir genero, cancion, artista Como Caracter;
 	Definir volumen Como Entero
 	Definir continuar Como Logico
-	
+	// Inicialización de variables
 	genero<- "-"
 	cancion<- "-"
 	artista <- "-"
-<<<<<<< HEAD
-	volumen <- 0
-	continuar <- Verdadero
-	
-	
-	Repetir
-		Inicio(cancion, artista, genero, volumen )
-		valorSeleccionado <- ingresoValor( )
-		Segun valorSeleccionado Hacer
-			"BUSCAR": 
-				
-=======
 	estadoReproduccion <- "Espera..."
 	volumen <- 0
 	continuar <- Verdadero
-	
+	// Definición e inicialización de los arreglos con la colección musical
+	// Arreglo para los géneros de las canciones
 	Dimension generoMusical[16]
 	generoMusical[1]="pop"
 	generoMusical[2]="pop"
@@ -221,7 +152,7 @@ Proceso ReproductorMusica
 	generoMusical[14]="cumbia"
 	generoMusical[15]="salsa"
 	generoMusical[16]="salsa"
-	
+	// Arreglo para los títulos de las canciones
 	Dimension cancionMusical[16]
 	cancionMusical[1]="blinding lights"
 	cancionMusical[2]="rolling in the deep"
@@ -239,7 +170,7 @@ Proceso ReproductorMusica
 	cancionMusical[14]="oye"
 	cancionMusical[15]="la vida es un carnaval"
 	cancionMusical[16]="yo no se mañana"
-	
+	// Arreglo para los artistas de las canciones
 	Dimension artistaMusical[16]
 	artistaMusical[1]="the weeknd"
 	artistaMusical[2]="adele"
@@ -257,17 +188,14 @@ Proceso ReproductorMusica
 	artistaMusical[14]="kumbia kings"
 	artistaMusical[15]="celia cruz"
 	artistaMusical[16]="luis enrique"
-	
-	
-	
-	
-	
+	// Bucle principal del reproductor: se repite hasta que el usuario decida apagarlo
 	Repetir
 		Inicio(cancion, artista, genero, volumen, estadoReproduccion )
-		Leer valorSeleccionado
+		Leer valorSeleccionado // Lee el comando ingresado por el usuario
+		// Estructura de control para manejar los diferentes comandos
 		Segun valorSeleccionado Hacer
-			"BUSCAR":
-				Definir busqueda Como Logico
+			"BUSCAR":  // Comando para buscar canciones
+				Definir busqueda Como Logico // Variable para validar el tipo de búsqueda
 				Repetir
 					Escribir "Ingresa el numero de como quieres realizar la busqueda"
 					Escribir "1. Genero"
@@ -283,48 +211,44 @@ Proceso ReproductorMusica
 				Hasta Que busqueda == Verdadero
 				
 				
-				Segun tipoBusqueda Hacer
-					"1":
+				Segun tipoBusqueda Hacer // Procesa la búsqueda según el tipo elegido
+					"1": // Búsqueda por Género
 						Repetir
 							Escribir "--- Lista de Genero Cancion ---"
 							Para i = 1 Hasta 16 Con Paso 2 Hacer
-								Escribir "*", generoMusical[i]
+								Escribir "*", generoMusical[i] // Muestra los géneros disponibles
 							Fin Para
 							Escribir "--------------------------"
 							Escribir "Ingresa el genero que quieres realizar la busqueda"
-							Leer  generoSeleccionado
+							Leer  generoSeleccionado // Lee el género a buscar
 							
-							Segun generoSeleccionado Hacer
+							Segun generoSeleccionado Hacer // Valida si el género es uno de los conocidos
 								"pop","rock","hip hop","electronica","jazz","reggaeton","cumbia","salsa":
 									busquedaGenero <- Verdadero
 								De Otro Modo:
 									busquedaGenero <- Falso
 							Fin Segun
-						Hasta Que busquedaGenero == Verdadero
+						Hasta Que busquedaGenero == Verdadero // Sale cuando el género es válido
 						
-						
-						
-						
-						Segun Minusculas(generoSeleccionado) Hacer
-							"pop":
-								
+						// Se procesa la selección de género
+						Segun Minusculas(generoSeleccionado) Hacer // Convierte a minúsculas para la comparación
+							"pop": // Si el género es "pop"
 								genero<- generoMusical[1]
 								Escribir "--- Lista de Canciones ---"
-								Para i = 1 Hasta 2 Hacer
+								Para i = 1 Hasta 2 Hacer // Muestra las canciones de ese género
 									Escribir (i), ". ", cancionMusical[i]," - ",  artistaMusical[i]  
 								Fin Para
 								Escribir "--------------------------"
 								continuar <- Verdadero
-								Esperar Tecla
 								Repetir
-									// Pide al usuario que ingrese el valor especificado:"base" o "altura".
+									// Bucle para validar la entrada del número de canción
 									Escribir "Ingresa el numero de la cancion que quieres reproducir"
 									Leer cancionReproducida // Lee la entrada del usuario
-									// Llama a la función revisarNumero para validar la entrada.
-									esNumero <- revisarNumero(cancionReproducida)
+									
+									esNumero <- revisarNumero(cancionReproducida) // Valida si es un número
 								Hasta Que esNumero == Verdadero
 								
-								
+								// Actualiza la información del reproductor con la canción seleccionada
 								genero<- generoMusical[cancionReproducida]
 								cancion<- cancionMusical[cancionReproducida]
 								artista <- artistaMusical[cancionReproducida]
@@ -341,16 +265,15 @@ Proceso ReproductorMusica
 								Fin Para
 								Escribir "--------------------------"
 								continuar <- Verdadero
-								Esperar Tecla
 								Repetir
-									// Pide al usuario que ingrese el valor especificado:"base" o "altura".
+									// Bucle para validar la entrada del número de canción
 									Escribir "Ingresa el numero de la cancion que quieres reproducir"
 									Leer cancionReproducida // Lee la entrada del usuario
-									// Llama a la función revisarNumero para validar la entrada.
-									esNumero <- revisarNumero(cancionReproducida)
+									
+									esNumero <- revisarNumero(cancionReproducida) // Valida si es un número
 								Hasta Que esNumero == Verdadero
 								
-								
+								// Actualiza la información del reproductor con la canción seleccionada
 								genero<- generoMusical[cancionReproducida]
 								cancion<- cancionMusical[cancionReproducida]
 								artista <- artistaMusical[cancionReproducida]
@@ -365,15 +288,15 @@ Proceso ReproductorMusica
 								Fin Para
 								Escribir "--------------------------"
 								continuar <- Verdadero
-								Esperar Tecla
 								Repetir
-									// Pide al usuario que ingrese el valor especificado:"base" o "altura".
+									// Bucle para validar la entrada del número de canción
 									Escribir "Ingresa el numero de la cancion que quieres reproducir"
 									Leer cancionReproducida // Lee la entrada del usuario
-									// Llama a la función revisarNumero para validar la entrada.
-									esNumero <- revisarNumero(cancionReproducida)
+									
+									esNumero <- revisarNumero(cancionReproducida) // Valida si es un número
 								Hasta Que esNumero == Verdadero
 								
+								// Actualiza la información del reproductor con la canción seleccionada
 								genero<- generoMusical[cancionReproducida]
 								cancion<- cancionMusical[cancionReproducida]
 								artista <- artistaMusical[cancionReproducida]
@@ -388,15 +311,15 @@ Proceso ReproductorMusica
 								Fin Para
 								Escribir "--------------------------"
 								continuar <- Verdadero
-								Esperar Tecla
 								Repetir
-									// Pide al usuario que ingrese el valor especificado:"base" o "altura".
+									// Bucle para validar la entrada del número de canción
 									Escribir "Ingresa el numero de la cancion que quieres reproducir"
 									Leer cancionReproducida // Lee la entrada del usuario
-									// Llama a la función revisarNumero para validar la entrada.
-									esNumero <- revisarNumero(cancionReproducida)
+									
+									esNumero <- revisarNumero(cancionReproducida) // Valida si es un número
 								Hasta Que esNumero == Verdadero
 								
+								// Actualiza la información del reproductor con la canción seleccionada
 								genero<- generoMusical[cancionReproducida]
 								cancion<- cancionMusical[cancionReproducida]
 								artista <- artistaMusical[cancionReproducida]
@@ -411,15 +334,15 @@ Proceso ReproductorMusica
 								Fin Para
 								Escribir "--------------------------"
 								continuar <- Verdadero
-								Esperar Tecla
 								Repetir
-									// Pide al usuario que ingrese el valor especificado:"base" o "altura".
+									// Bucle para validar la entrada del número de canción
 									Escribir "Ingresa el numero de la cancion que quieres reproducir"
 									Leer cancionReproducida // Lee la entrada del usuario
-									// Llama a la función revisarNumero para validar la entrada.
-									esNumero <- revisarNumero(cancionReproducida)
+									
+									esNumero <- revisarNumero(cancionReproducida) // Valida si es un número
 								Hasta Que esNumero == Verdadero
 								
+								// Actualiza la información del reproductor con la canción seleccionada
 								genero<- generoMusical[cancionReproducida]
 								cancion<- cancionMusical[cancionReproducida]
 								artista <- artistaMusical[cancionReproducida]
@@ -434,16 +357,15 @@ Proceso ReproductorMusica
 								Fin Para
 								Escribir "--------------------------"
 								continuar <- Verdadero
-								Esperar Tecla
 								Repetir
-									// Pide al usuario que ingrese el valor especificado:"base" o "altura".
+									// Bucle para validar la entrada del número de canción
 									Escribir "Ingresa el numero de la cancion que quieres reproducir"
 									Leer cancionReproducida // Lee la entrada del usuario
-									// Llama a la función revisarNumero para validar la entrada.
-									esNumero <- revisarNumero(cancionReproducida)
+									
+									esNumero <- revisarNumero(cancionReproducida) // Valida si es un número
 								Hasta Que esNumero == Verdadero
 								
-								
+								// Actualiza la información del reproductor con la canción seleccionada
 								genero<- generoMusical[cancionReproducida]
 								cancion<- cancionMusical[cancionReproducida]
 								artista <- artistaMusical[cancionReproducida]
@@ -458,15 +380,15 @@ Proceso ReproductorMusica
 								Fin Para
 								Escribir "--------------------------"
 								continuar <- Verdadero
-								Esperar Tecla
 								Repetir
-									// Pide al usuario que ingrese el valor especificado:"base" o "altura".
+									// Bucle para validar la entrada del número de canción
 									Escribir "Ingresa el numero de la cancion que quieres reproducir"
 									Leer cancionReproducida // Lee la entrada del usuario
-									// Llama a la función revisarNumero para validar la entrada.
-									esNumero <- revisarNumero(cancionReproducida)
+									
+									esNumero <- revisarNumero(cancionReproducida) // Valida si es un número
 								Hasta Que esNumero == Verdadero
 								
+								// Actualiza la información del reproductor con la canción seleccionada
 								genero<- generoMusical[cancionReproducida]
 								cancion<- cancionMusical[cancionReproducida]
 								artista <- artistaMusical[cancionReproducida]
@@ -481,17 +403,15 @@ Proceso ReproductorMusica
 								Fin Para
 								Escribir "--------------------------"
 								continuar <- Verdadero
-								Esperar Tecla
-								
 								Repetir
-									// Pide al usuario que ingrese el valor especificado:"base" o "altura".
+									// Bucle para validar la entrada del número de canción
 									Escribir "Ingresa el numero de la cancion que quieres reproducir"
 									Leer cancionReproducida // Lee la entrada del usuario
-									// Llama a la función revisarNumero para validar la entrada.
-									esNumero <- revisarNumero(cancionReproducida)
+									
+									esNumero <- revisarNumero(cancionReproducida) // Valida si es un número
 								Hasta Que esNumero == Verdadero
 								
-								
+								// Actualiza la información del reproductor con la canción seleccionada
 								genero<- generoMusical[cancionReproducida]
 								cancion<- cancionMusical[cancionReproducida]
 								artista <- artistaMusical[cancionReproducida]
@@ -502,18 +422,18 @@ Proceso ReproductorMusica
 								Escribir "No se encuentra valor"
 						Fin Segun
 						Esperar Tecla
-					"2":
-						Repetir
+					"2": // Búsqueda por Artista
+						Repetir  // Bucle para asegurar que el artista sea válido
 							
 							Escribir "--- Lista de Artistas  ---"
 							Para i <- 1 Hasta 16 Con Paso 1 Hacer
-								Escribir "*", artistaMusical[i]
+								Escribir "*", artistaMusical[i]  // Muestra la lista de artistas disponibles
 							Fin Para
 							Escribir "--------------------------"
 							Escribir ""
 							Escribir "Ingresa el artista que desea buscar:"
-							Leer palabraBuscada
-							
+							Leer palabraBuscada // Lee el nombre del artista a buscar
+							// Busca el artista en el arreglo
 							Dimension arregloArtistas[1]
 							contador<-0
 							Para i <- 1 Hasta 16 Con Paso 1 Hacer
@@ -525,10 +445,10 @@ Proceso ReproductorMusica
 							
 							Escribir "Buscando ..."
 							Esperar 2 segundos
-							Si contador >0 Entonces
+							Si contador >0 Entonces // Si se encontró al menos una canción del artista
 								
 								artistaBuscado <- Verdadero 
-							SiNo
+							SiNo // Si no se encontró el artista
 								Escribir "No se encontro artista"
 								Esperar 2 Segundos
 								artistaBuscado <- Falso 
@@ -536,36 +456,36 @@ Proceso ReproductorMusica
 						Hasta Que artistaBuscado = Verdadero 
 						
 						Escribir "--- Lista de Canciones ---"
-						Para i = 1 Hasta 1 Hacer
+						Para i = 1 Hasta 1 Hacer // Muestra la(s) canción(es) del artista encontrado
 							numeroCancion <- arregloArtistas[i]
 							Escribir (numeroCancion), ". ", cancionMusical[numeroCancion]," - ",  artistaMusical[numeroCancion]  
 						Fin Para
 						Escribir "--------------------------"
 						continuar <- Verdadero
 						Esperar Tecla
-						Repetir
-							// Pide al usuario que ingrese el valor especificado:"base" o "altura".
+						Repetir  // Bucle para validar la entrada del número de canción
+							
 							Escribir "Ingresa el numero de la cancion que quieres reproducir"
 							Leer cancionReproducida // Lee la entrada del usuario
-							// Llama a la función revisarNumero para validar la entrada.
+							
 							esNumero <- revisarNumero(cancionReproducida)
 						Hasta Que esNumero == Verdadero
 						
-						
+						// Actualiza la información del reproductor
 						genero<- generoMusical[cancionReproducida]
 						cancion<- cancionMusical[cancionReproducida]
 						artista <- artistaMusical[cancionReproducida]
 						volumen <- 20
 						estadoReproduccion <- pausarMusica("Pausado")
-					"3":
+					"3": // Búsqueda por Canción
 						Escribir "Ingresa la cancion que desea buscar:"
 						Leer palabraBuscada
 						Dimension arregloMusica[1]
 						contador<-0
-						Para i <- 1 Hasta 16 Con Paso 1 Hacer
+						Para i <- 1 Hasta 16 Con Paso 1 Hacer // Recorre la lista de canciones
 							Si Minusculas(cancionMusical[i]) = Minusculas(palabraBuscada) Entonces
 								contador<-contador+1
-								arregloMusica[contador] <- i 
+								arregloMusica[contador] <- i   // Guarda el índice de la canción encontrada
 							FinSi
 						FinPara
 						
@@ -579,13 +499,12 @@ Proceso ReproductorMusica
 						Esperar Tecla
 						
 						Repetir
-							// Pide al usuario que ingrese el valor especificado:"base" o "altura".
 							Escribir "Ingresa el numero de la cancion que quieres reproducir"
 							Leer cancionReproducida // Lee la entrada del usuario
-							// Llama a la función revisarNumero para validar la entrada.
+							
 							esNumero <- revisarNumero(cancionReproducida)
 						Hasta Que esNumero == Verdadero
-						
+						// Actualiza la información del reproductor
 						genero<- generoMusical[cancionReproducida]
 						cancion<- cancionMusical[cancionReproducida]
 						artista <- artistaMusical[cancionReproducida]
@@ -593,47 +512,42 @@ Proceso ReproductorMusica
 						estadoReproduccion <- pausarMusica("Pausado")
 						
 					De Otro Modo:
-						Escribir "Ingresa un numero correcto"
+						Escribir "Ingresa un numero correcto" // Mensaje de error
 				Fin Segun
 				
 				continuar <- Verdadero
-			"LISTA": 
+			"LISTA":  // Comando para mostrar la lista completa de canciones
 				Escribir "--- Lista de Canciones ---"
-                Para i = 1 Hasta 16 Hacer
+                Para i = 1 Hasta 16 Hacer // Recorre y muestra todas las canciones
                     Escribir (i), ". ", cancionMusical[i]," - ",  artistaMusical[i]  
                 Fin Para
                 Escribir "--------------------------"
 				continuar <- Verdadero
-				Esperar Tecla
-				
 				Repetir
-					// Pide al usuario que ingrese el valor especificado:"base" o "altura".
+					
 					Escribir "Ingresa el numero de la cancion que quieres reproducir"
 					Leer cancionReproducida // Lee la entrada del usuario
-					// Llama a la función revisarNumero para validar la entrada.
+					
+					
 					esNumero <- revisarNumero(cancionReproducida)
-				Hasta Que esNumero == Verdadero
-				
+					
+				Hasta Que esNumero == Verdadero y ConvertirANumero(cancionReproducida) <= 16 Y ConvertirANumero(cancionReproducida) >= 1
+				// Actualiza la información del reproductor con la canción seleccionada
 				genero<- generoMusical[cancionReproducida]
 				cancion<- cancionMusical[cancionReproducida]
 				artista <- artistaMusical[cancionReproducida]
 				volumen <- 20
 				estadoReproduccion <- pausarMusica("Pausado")
 				
-			"PAUSA":
+			"PAUSA": // Comando para pausar o reanudar la música
 				estadoReproduccion <- pausarMusica(estadoReproduccion)
->>>>>>> manuel
 				continuar <- Verdadero
-			"VOLUMEN":
+			"VOLUMEN":  // Comando para ajustar el volumen
 				volumen <- volumenMusica()
 				continuar <- Verdadero
-			"APAGAR":
-<<<<<<< HEAD
-				continuar <- apagarReproductor ()
-=======
+			"APAGAR": // Comando para apagar el reproductor
 				continuar <- apagarReproductor()
->>>>>>> manuel
-			De Otro Modo:
+			De Otro Modo: // Si el comando ingresado no es ninguno de los anteriores
 				continuar <- comandoNoEncontrado()
 		Fin Segun
 	Hasta Que continuar = Falso
